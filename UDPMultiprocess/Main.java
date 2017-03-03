@@ -7,10 +7,10 @@ public class Main {
 			DatagramSocket s = new DatagramSocket(12345);
 			System.out.println("Server running on " + s.getLocalAddress() + ":" + s.getLocalPort());
 
+				byte[] buffer = new byte[2048];
 			// Receive packet(s)
 			while(true) {
 				// Datagram packet
-				byte[] buffer = new byte[2048];
 				DatagramPacket received = new DatagramPacket(buffer, 2048);
 				s.receive(received);
 

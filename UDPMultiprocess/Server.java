@@ -5,14 +5,12 @@ public class Server extends Thread {
 	private DatagramPacket tosend;
 	private DatagramPacket received;
 	private DatagramSocket s;
-	private byte[] buffer;
 	private InetAddress cl_ip;
 	private int cl_port;
 
-	public Server(DatagramSocket s, DatagramPacket r, byte[] b) {
+	public Server(DatagramSocket s, DatagramPacket r) {
 		this.s = s;
 		this.received = r;
-		this.buffer = b;
 	}
 
 	public void run() {

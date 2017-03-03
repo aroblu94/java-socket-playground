@@ -15,7 +15,7 @@ public class Main {
 				s.receive(received);
 
 				// Start a new thread
-				Server srv = new Server(s, received, buffer);
+				Server srv = new Server(s, received);
 				srv.start();
 			}
 		}
@@ -23,9 +23,5 @@ public class Main {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-	}
-
-	private static synchronized void newWorker(DatagramSocket s) {
-		
 	}
 }

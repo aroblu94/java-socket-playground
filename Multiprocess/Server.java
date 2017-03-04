@@ -12,21 +12,27 @@ public class Server extends Thread {
 	public void run() {
 		try {
 			// Debug connection
-			System.out.println("Connected with host " + socket.getInetAddress() + ":" + socket.getPort());
+			System.out.println("*** Connected with host " + socket.getInetAddress() + ":" + socket.getPort());
 
 			// IO
 			BufferedReader fromCl = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			PrintWriter toCl = new PrintWriter(socket.getOutputStream(),true);
 			String str = "";
 			
-			// Talking with client
-			do {
+			// Talk
+			while(true) {
 				str = fromCl.readLine();
-				System.out.println("[" + socket.getInetAddress() + ":" + socket.getPort() + "] > " + str);
-				toCl.println("Received '" + str + "'");
-			} while(!str.equals("."));
 
-			// Close connection
+				// Do not print/send 'null' - Avoid NullPointerException
+				if (str == null || str.equals("."))
+					break;
+
+				System.out.println("[" + socket.getInetAddress() + ":" + socket.getPort() + "] > " + str);
+				toCl.println("Received \"" + str + "\"");
+			}
+
+			// Close the connection with current served client
+			System.out.println("Connection with " + socket.getInetAddress() + ":" + socket.getPort() + " closed.");
 			socket.close();
 		}
 		catch(Exception e) {

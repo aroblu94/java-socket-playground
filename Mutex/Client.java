@@ -16,13 +16,18 @@ public class Client {
 			BufferedReader fromSrv = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			PrintWriter toSrv = new PrintWriter(s.getOutputStream(),true);
 			String str = "";
-
+			
 			// Talking with server
-			do {
+			while(true) {
 				str = in.readLine();
+
+				if(str.equals(""))
+					continue;
+				if(str.equals("."))
+					break;
 				toSrv.println(str);
 				System.out.println(" > " + fromSrv.readLine());
-			} while(!str.equals("."));
+			}
 
 			// Close the connection
 			s.close();
